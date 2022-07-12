@@ -1,0 +1,663 @@
+let displayStart = true;
+
+setInterval(function() {
+  displayStart = !displayStart
+}, 800);
+
+let song;
+let starX, starY, starColour;
+let x = 0;
+let y = 5;
+let speedX = 1;
+let speedY = 0;
+let foodX, foodY, foodColour;
+let myFont;
+let imageOnScreen = true;
+//let levelOne = true;
+let level = 1;
+
+//food level 2
+
+let foodX2, foodY2;
+
+//food level 3
+
+let foodX3, foodY3;
+
+//food level 4
+
+let foodX4, foodY4;
+
+//food level 5
+
+let foodX5, foodY5;
+
+//food level 6
+
+let foodX6, foodY6;
+
+// levels
+let question = 0;
+let score1 = 1;
+let score2 = 2
+let Intro;
+let score = 1;
+
+//font
+
+
+function preload() {
+  
+  Intro = loadImage("assets/cassiopeia3.jpg");
+  myFont = loadFont("assets/engry.otf");
+  
+  
+  
+}
+
+
+
+function setup() {
+  createCanvas(800, 494);
+  
+  
+
+ song = loadSound ("assets/music.mp3", loaded); 
+
+  
+  starX = random(width);
+  starY = random(height);
+
+  //font
+
+  textFont(myFont);
+  textSize(30);
+  textAlign(CENTER, CENTER);
+
+  // defining variables
+
+  foodX = (330);
+  foodY = (200);
+  foodColour = (0);
+
+  foodX2 = (670);
+  foodY2 = (350);
+
+  foodX3 = (390);
+  foodY3 = (100);
+
+  foodX4 = (130);
+  foodY4 = (150);
+
+  foodX5 = (630);
+  foodY5 = (280);
+
+  foodX6 = (358);
+  foodY6 = (283);
+
+  noStroke();
+
+
+}
+
+
+function loaded() {
+
+}
+
+function draw() {
+  
+  
+  
+  song.setVolume (1);
+  
+  background(48, 69, 138);
+
+
+  if (imageOnScreen == true) {
+    image(Intro, 0, -5, 800, 500);
+
+    fill(255);
+    rect(120, 120, 525, 30);
+
+    if (displayStart) {
+      fill(50);
+      text('PRESS ENTER TO START', width / 2, 126)
+
+    }
+
+  }
+
+
+  if (imageOnScreen == false) {
+
+
+
+    fill(255, 242, 140);
+
+    push();
+    translate(starX, starY);
+    star(starX, starY, 10, 30, 4);
+    pop();
+
+    //first level
+
+    if (level == 1) {
+
+      fill(foodColour);
+
+
+      // cassiopeia drawing
+      ellipse(foodX, foodY, 10, 10);
+      fill(255);
+      ellipse(100, 100, 10, 10);
+      ellipse(220, 200, 10, 10);
+      ellipse(420, 300, 10, 10);
+      ellipse(510, 220, 10, 10);
+
+      line(100, 100, 220, 200);
+      stroke(255);
+      line(220, 200, 330, 200);
+      stroke(255);
+      line(330, 200, 420, 300);
+      stroke(255);
+      line(420, 300, 510, 220);
+      stroke(255);
+
+      starX += speedX;
+      starY += speedY;
+
+
+      // if star moves out of screen: go back
+
+      if (starX > width) {
+        starX = 0;
+      }
+
+      if (starX < 0) {
+        starX = width;
+      }
+
+      if (starY > height) {
+        starY = 0;
+      }
+
+      if (starY < 0) {
+        starY = height;
+      }
+
+
+
+      if (dist(foodX, foodY, starX, starY) < 20) {
+        starColour = 0;
+        speedX = 0;
+        speedY = 0;
+        score++;
+        level++;
+
+      }
+
+      text("Cassiopeia", 400, 400);
+      fill(255);
+      text("  Level: " + score, 400, 50);
+      fill(255);
+      textSize(20);
+    }
+
+  }
+
+  //end level
+
+  //next level
+
+
+
+  if (level == 2) {
+
+    fill(foodColour);
+    ellipse(foodX2, foodY2, 10, 10);
+
+    //Orion drawing
+
+    fill(255);
+    ellipse(325, 170, 10, 10);
+    ellipse(390, 60, 10, 10);
+    ellipse(475, 85, 10, 10);
+    ellipse(475, 85, 10, 10);
+    ellipse(515, 236, 10, 10);
+    ellipse(480, 440, 10, 10);
+    ellipse(470, 290, 10, 10);
+
+
+    line(325, 170, 390, 60);
+    stroke(255);
+    line(390, 60, 475, 85);
+    stroke(255);
+    line(475, 85, 515, 236);
+    stroke(255);
+    line(515, 236, 670, 350);
+    stroke(255);
+    line(670, 350, 480, 440);
+    line(480, 440, 470, 290);
+    line(470, 290, 325, 170);
+
+    starX += speedX;
+    starY += speedY;
+
+    //if star moves out of screen: go back
+
+    if (starX > width) {
+      starX = 0;
+    }
+
+    if (starX < 0) {
+      starX = width;
+    }
+
+    if (starY > height) {
+      starY = 0;
+    }
+
+    if (starY < 0) {
+      starY = height;
+    }
+
+
+
+    if (dist(foodX2, foodY2, starX, starY) < 20) {
+      circleColour = 0;
+      speedX = 0;
+      speedY = 0;
+      score += 1;
+      level += 1;
+
+    }
+    fill(255);
+    text("  Level: " + score2, 400, 50);
+    fill(255);
+    textSize(20);
+    text("Orion", 400, 400);
+
+    //end level
+  }
+
+  //next level
+
+  if (level == 3) {
+
+
+    fill(foodColour);
+    ellipse(foodX3, foodY3, 10, 10);
+
+    //Triangulum drawing
+
+
+    fill(255);
+    ellipse(120, 400, 10, 10);
+    ellipse(650, 400, 10, 10);
+
+
+    stroke(255);
+    line(120, 400, 390, 100);
+    stroke(255);
+    line(390, 100, 650, 400);
+    stroke(255);
+    line(120, 400, 650, 400);
+
+    starX += speedX;
+    starY += speedY;
+
+    //if star moves out of screen: go back
+
+    if (starX > width) {
+      starX = 0;
+    }
+
+    if (starX < 0) {
+      starX = width;
+    }
+
+    if (starY > height) {
+      starY = 0;
+    }
+
+    if (starY < 0) {
+      starY = height;
+    }
+
+    if (dist(foodX3, foodY3, starX, starY) < 20) {
+      starColour = 0;
+      speedX = 0;
+      speedY = 0;
+      score += 1;
+      level += 1;
+
+    }
+    fill(255);
+    text("  Level: " + score, 400, 50);
+    fill(255);
+    textSize(20);
+    text("Triangulum", 400, 400);
+
+  }
+
+  if (level == 4) {
+
+
+    fill(foodColour);
+    ellipse(foodX4, foodY4, 10, 10);
+
+    //Ursa Minor drawing
+
+
+    fill(255);
+    ellipse(210, 80, 10, 10);
+    ellipse(250, 120, 10, 10);
+    ellipse(180, 190, 10, 10);
+    //ellipse(130, 150, 10, 10);
+    ellipse(250, 120, 10, 10);
+    ellipse(345, 80, 10, 10);
+    ellipse(440, 90, 10, 10);
+    ellipse(500, 125, 10, 10);
+
+    stroke(255);
+    line(130, 150, 210, 80);
+    stroke(255);
+    line(210, 80, 250, 120);
+    stroke(255);
+    line(250, 120, 180, 190);
+    line(180, 190, 130, 150);
+    line(250, 120, 345, 80);
+    line(345, 80, 440, 90);
+    line(440, 90, 500, 125);
+
+    starX += speedX;
+    starY += speedY;
+
+    //if star moves out of screen: go back
+
+    if (starX > width) {
+      starX = 0;
+    }
+
+    if (starX < 0) {
+      starX = width;
+    }
+
+    if (starY > height) {
+      starY = 0;
+    }
+
+    if (starY < 0) {
+      starY = height;
+    }
+
+    // print(dist (circleX, circleY, foodX,foodY));
+
+    if (dist(foodX4, foodY4, starX, starY) < 20) {
+      starColour = 0;
+      speedX += 0;
+      speedY += 0;
+      score += 1;
+      level += 1;
+
+    }
+    fill(255);
+    text("  Level: " + score, 400, 50);
+    fill(255);
+    textSize(20);
+    text("Ursa Minor", 400, 400);
+
+  }
+
+  if (level == 5) {
+
+
+
+    fill(foodColour);
+    ellipse(foodX5, foodY5, 10, 10);
+
+    //Cepheus drawing
+
+    fill(255);
+    ellipse(270, 290, 10, 10);
+    ellipse(265, 60, 10, 10);
+    ellipse(448, 200, 10, 10);
+    ellipse(270, 290, 10, 10);
+    ellipse(350, 430, 10, 10);
+    ellipse(500, 350, 10, 10);
+    ellipse(590, 330, 10, 10);
+    ellipse(350, 430, 10, 10);
+    ellipse(330, 460, 10, 10);
+    ellipse(280, 420, 10, 10);
+    //ellipse (630, 280, 10, 10);
+
+    stroke(255);
+    line(270, 290, 265, 60);
+    stroke(255);
+    line(265, 60, 448, 200);
+    stroke(255);
+    line(448, 200, 270, 290);
+    line(270, 290, 350, 430);
+    line(350, 430, 500, 350);
+    line(500, 350, 448, 200);
+    line(500, 350, 590, 330);
+    line(590, 330, 630, 280);
+    line(350, 430, 330, 460);
+    line(330, 460, 280, 420);
+
+
+    starX += speedX;
+    starY += speedY;
+
+    //if star moves out of screen: go back
+
+    if (starX > width) {
+      starX = 0;
+    }
+
+    if (starX < 0) {
+      starX = width;
+    }
+
+    if (starY > height) {
+      starY = 0;
+    }
+
+    if (starY < 0) {
+      starY = height;
+    }
+
+
+
+    if (dist(foodX5, foodY5, starX, starY) < 20) {
+      speedX += 0;
+      speedY += 0;
+      score += 1;
+      level += 1;
+
+    }
+
+    fill(255);
+    text("  Level: " + score, 400, 50);
+    fill(255);
+    textSize(20);
+    text("Cepheus", 400, 400);
+
+  }
+
+
+
+  if (level == 6) {
+    
+    
+    if (!song.isPlaying()) {
+  song.play();
+}  
+    
+    
+    fill(foodColour);
+    ellipse(foodX6, foodY6, 10, 10);
+
+    // Sophie drawing
+
+    fill(255);
+    noStroke();
+    ellipse(200, 278, 10);
+    ellipse(220, 386, 10);
+    ellipse(300, 280, 10);
+    ellipse(329, 248, 10);
+    ellipse(360, 208, 10);
+    //ellipse (360, 285, 10 ) ;
+    ellipse(388, 278, 10);
+    ellipse(423, 344, 10);
+    ellipse(426, 283, 10);
+    ellipse(450, 223, 10);
+    ellipse(480, 285, 10);
+    ellipse(460, 300, 10);
+    ellipse(500, 280, 10);
+    ellipse(590, 280, 10);
+    ellipse(575, 384, 10);
+    ellipse(488, 150, 10);
+    ellipse(550, 60, 10);
+    ellipse(377, 20, 10);
+    ellipse(300, 158, 10);
+    ellipse(224, 125, 10);
+
+
+    stroke(255);
+
+    line(490, 150, 550, 60);
+    line(550, 60, 380, 20);
+    line(380, 20, 490, 150);
+    line(380, 20, 300, 160);
+    line(300, 160, 225, 125);
+    line(225, 125, 380, 20);
+    noFill();
+    ellipse(387, 130, 110, 150);
+
+    line(305, 280, 200, 280);
+    line(220, 390, 200, 280);
+    line(375, 380, 360, 290);
+    line(440, 380, 390, 280);
+    line(424, 350, 430, 280);
+    line(460, 300, 470, 380);
+    line(500, 280, 590, 280);
+    line(575, 388, 590, 280);
+    line(360, 200, 390, 280);
+    line(416, 195, 410, 280);
+    line(330, 250, 360, 290);
+    line(330, 250, 362, 206);
+    line(460, 300, 500, 280);
+    line(480, 290, 450, 223);
+    line(450, 223, 430, 280)
+
+
+
+
+    //lips
+    push();
+    translate(0, -100);
+    fill('#e74545');
+    noStroke();
+    arc(378, 250, 30, 20, PI, 0);
+    arc(395, 250, 30, 20, PI, 0);
+
+    // bottom lip
+    fill('#E21717');
+    noStroke();
+    arc(387, 251, 50, 30, 0, PI);
+    pop();
+
+
+    starX += speedX;
+    starY += speedY;
+
+    //if star moves out of screen: go back
+
+    if (starX > width) {
+      starX = 0;
+    }
+
+    if (starX < 0) {
+      starX = width;
+    }
+
+    if (starY > height) {
+      starY = 0;
+    }
+
+    if (starY < 0) {
+      starY = height;
+    }
+
+
+
+    if (dist(foodX6, foodY6, starX, starY) < 20) {
+      starColour = 0;
+      speedX += 0;
+      speedY += 0;
+      score += 1;
+      level += 1;
+
+    }
+
+    fill(255);
+    text("  Level: " + score, 400, 50);
+    fill(255);
+    textSize(20);
+    text("SOPHIE", 400, 400);
+
+  }
+
+
+
+  if (level == 7) {
+
+    textSize(40);
+    text(" End of the game ", 300, 200);
+
+
+  }
+}
+
+
+
+
+
+function keyPressed() {
+  if (keyCode === UP_ARROW) {
+    speedX = 0 * level;
+    speedY = -2 * level;
+  } else if (keyCode === DOWN_ARROW) {
+    speedX = 0 * level;
+    speedY = 2 * level;
+  } else if (keyCode === LEFT_ARROW) {
+    speedX = -2 * level;
+    speedY = 0 * level;
+  } else if (keyCode === RIGHT_ARROW) {
+    speedX = 2 * level;
+    speedY = 0 * level;
+  }
+
+  if (keyCode == ENTER) {
+    imageOnScreen = false
+  }
+
+}
+
+function star(circleX, circleY, radius1, radius2, npoints) {
+  var angle = TWO_PI / npoints;
+  var halfAngle = angle / 2.0;
+  beginShape();
+  for (var a = 0; a < TWO_PI; a += angle) {
+    var sx = x + cos(a) * radius2;
+    var sy = y + sin(a) * radius2;
+    vertex(sx, sy);
+    sx = x + cos(a + halfAngle) * radius1;
+    sy = y + sin(a + halfAngle) * radius1;
+    vertex(sx, sy);
+  }
+  endShape(CLOSE);
+
+}
